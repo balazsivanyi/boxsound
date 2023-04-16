@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8703b3fa1cf4542a0937a4fc4d8f80d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundPaused: 1
   audioSource: {fileID: 31643419}
 --- !u!114 &31643421
 MonoBehaviour:
@@ -396,6 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632515808ef4e4fd59e8c31939642a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mappedFreq: 0
+  smoothingValue: 0.1
 --- !u!1 &97746584
 GameObject:
   m_ObjectHideFlags: 0

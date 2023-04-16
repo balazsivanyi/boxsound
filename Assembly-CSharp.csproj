@@ -76,6 +76,7 @@
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TeleType.cs" />
      <Compile Include="Assets/Chunity/Scripts/Examples/ChunityExampleRunFromFile.cs" />
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventCheck.cs" />
+     <Compile Include="Assets/Scripts/AccelerometerData.cs" />
      <Compile Include="Assets/Chunity/Scripts/Examples/ChunityExampleGlobalEventWithHelperComponents.cs" />
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_UiFrameRateCounter.cs" />
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01.cs" />

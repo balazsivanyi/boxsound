@@ -389,6 +389,7 @@
 "Assets/Chunity/Scripts/Utility/ChuckIntSyncer.cs"
 "Assets/Chunity/Scripts/Utility/ChuckStringSyncer.cs"
 "Assets/Chunity/Scripts/Utility/TheChuck.cs"
+"Assets/Scripts/AccelerometerData.cs"
 "Assets/Scripts/AudioAnalyzer.cs"
 "Assets/Scripts/MakeSound.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
