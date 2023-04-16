@@ -12,10 +12,6 @@ public class AudioAnalyzer : MonoBehaviour
     //setting variable for image color
     private Image backGround;
     public float mappedFreq;
-    
-    //accelerometer variables
-    private Vector3 smoothedAccelerometerData;
-    public float smoothingValue = 0.1f;
 
     
 
@@ -55,11 +51,11 @@ public class AudioAnalyzer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log( "most recent frequency value: " + 
+        /* Debug.Log( "most recent frequency value: " + 
 			myGetFreqSyncer.GetCurrentValue().ToString( "0.000" )
-		);
+		); */
         //FrequencyVisualizer();
-        getAccelerometerData();
+        
     }
 
     public void FrequencyVisualizer() {
@@ -76,19 +72,4 @@ public class AudioAnalyzer : MonoBehaviour
         }
     }
 
-    public void getAccelerometerData() {
-        // Get accelerometer data
-        Vector3 accelerometerData = Input.acceleration;
-
-        smoothedAccelerometerData = Vector3.Lerp(smoothedAccelerometerData, accelerometerData, smoothingValue);
-
-        // Map accelerometer data to RGB color
-        float r = Mathf.Clamp01(smoothedAccelerometerData.x + 0.5f);
-        float g = Mathf.Clamp01(smoothedAccelerometerData.y + 0.5f);
-        float b = Mathf.Clamp01(smoothedAccelerometerData.z + 0.5f);
-
-        // Set object color
-        backGround.material.color = new Color(r, g, b);
-        //Debug.Log("Accelerometer Data: X = " + smoothedAccelerometerData.x + ", Y = " + smoothedAccelerometerData.y + ", Z = " + smoothedAccelerometerData.z);
-    }
 }
