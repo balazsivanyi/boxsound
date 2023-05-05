@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AudioAnalyzer
     - ChuckMainInstance
     - ChuckSubInstance
     - MakeSound
@@ -22,6 +23,8 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEditor.UI.dll:
+    - UnityEditor.UI.ImageEditor
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -98,29 +101,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2632}
     - Class: 114
-      Script: {instanceID: 2842}
+      Script: {instanceID: 2648}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 2844}
     - Class: 114
-      Script: {instanceID: 4062}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 4180}
+      Script: {instanceID: 4066}
     - Class: 114
-      Script: {instanceID: 4438}
+      Script: {instanceID: 4184}
     - Class: 114
-      Script: {instanceID: 5054}
+      Script: {instanceID: 4442}
     - Class: 114
-      Script: {instanceID: 5176}
+      Script: {instanceID: 5058}
     - Class: 114
-      Script: {instanceID: 5770}
+      Script: {instanceID: 5180}
     - Class: 114
-      Script: {instanceID: 5928}
+      Script: {instanceID: 5774}
     - Class: 114
-      Script: {instanceID: 6258}
+      Script: {instanceID: 5932}
     - Class: 114
-      Script: {instanceID: 6318}
+      Script: {instanceID: 6262}
     - Class: 114
-      Script: {instanceID: 6982}
+      Script: {instanceID: 6322}
+    - Class: 114
+      Script: {instanceID: 6986}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -320,6 +325,12 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: d358a444a10331ab681629eab1c7e59f
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: AudioAnalyzer
+  - hash:
+      serializedVersion: 2
       Hash: bf8e7513a6a15e836c34b697fcf2ccd7
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
@@ -438,6 +449,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: Benchmark04
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: AccelerometerData
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
@@ -1172,7 +1189,7 @@ ScriptsOnlyBuild:
     className: UnityOnScrollRectValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 751e5bae2a317288c2ab58d66687092b
+      Hash: 1556f3dc863e49bc5b7808e4cf573bdb
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: MakeSound
@@ -1371,4 +1388,4 @@ ScriptsOnlyBuild:
   platform: 9
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: /Users/balazsivanyi/AAU/MSc/4th_semester/builds/build5
+  playerPath: /Users/balazsivanyi/AAU/MSc/4th_semester/builds/build7

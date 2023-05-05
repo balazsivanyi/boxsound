@@ -242,9 +242,17 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_AudioSource_get_mute();
 		Register_UnityEngine_AudioSource_get_mute();
 
+		//System.Void UnityEngine.AudioSource::Pause()
+		void Register_UnityEngine_AudioSource_Pause();
+		Register_UnityEngine_AudioSource_Pause();
+
 		//System.Void UnityEngine.AudioSource::PlayHelper(UnityEngine.AudioSource,System.UInt64)
 		void Register_UnityEngine_AudioSource_PlayHelper();
 		Register_UnityEngine_AudioSource_PlayHelper();
+
+		//System.Void UnityEngine.AudioSource::UnPause()
+		void Register_UnityEngine_AudioSource_UnPause();
+		Register_UnityEngine_AudioSource_UnPause();
 
 		//System.Void UnityEngine.AudioSource::set_clip(UnityEngine.AudioClip)
 		void Register_UnityEngine_AudioSource_set_clip();
@@ -1006,6 +1014,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_GameObject_TryGetComponentInternal();
 		Register_UnityEngine_GameObject_TryGetComponentInternal();
 
+		//UnityEngine.GameObject UnityEngine.GameObject::Find(System.String)
+		void Register_UnityEngine_GameObject_Find();
+		Register_UnityEngine_GameObject_Find();
+
 		//UnityEngine.Transform UnityEngine.GameObject::get_transform()
 		void Register_UnityEngine_GameObject_get_transform();
 		Register_UnityEngine_GameObject_get_transform();
@@ -1441,6 +1453,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Input::GetTouch_Injected(System.Int32,UnityEngine.Touch&)
 		void Register_UnityEngine_Input_GetTouch_Injected();
 		Register_UnityEngine_Input_GetTouch_Injected();
+
+		//System.Void UnityEngine.Input::get_acceleration_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_Input_get_acceleration_Injected();
+		Register_UnityEngine_Input_get_acceleration_Injected();
 
 		//System.Void UnityEngine.Input::get_compositionCursorPos_Injected(UnityEngine.Vector2&)
 		void Register_UnityEngine_Input_get_compositionCursorPos_Injected();

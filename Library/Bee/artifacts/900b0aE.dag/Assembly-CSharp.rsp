@@ -392,6 +392,7 @@
 "Assets/Scripts/AccelerometerData.cs"
 "Assets/Scripts/AudioAnalyzer.cs"
 "Assets/Scripts/MakeSound.cs"
+"Assets/Scripts/RecordAudio.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"

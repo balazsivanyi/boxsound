@@ -45,7 +45,7 @@ public class MakeSound : MonoBehaviour
 
             fun void playTwoBars(int position, int chord[]) 
             {    
-                1::second => dur beat;
+                2::second => dur beat;
                 SinOsc osc => ADSR env1 => NRev rev1 => dac;
                 (beat / 2, beat / 2, 0, 1::ms) => env1.set;
                 0.2 => osc.gain;
@@ -57,10 +57,10 @@ public class MakeSound : MonoBehaviour
                 delay2 => delay2;
 
                 (4::ms, beat / 8, 0, 1::ms) => env2.set;
-                0.4 => osc2.gain;
+                0.7 => osc2.gain;
 
                 beat => delay2.max;
-                beat / 8 => delay2.delay;
+                beat / 16 => delay2.delay;
                 myDelayGain => delay2.gain;
 
                 myReverbGain2 => rev2.mix;
@@ -94,8 +94,6 @@ public class MakeSound : MonoBehaviour
                 }
             }
             
-            
-            chout <= ""Rate is "" <= myDelayGain <= IO.newline();
             
             while(true) {
                 playSound => now;
@@ -131,7 +129,7 @@ public class MakeSound : MonoBehaviour
     {
         soundPaused = !soundPaused;
 
-        if (soundPaused)
+        if (soundPaused) 
         {            
             audioSource.Pause();
 
@@ -159,15 +157,15 @@ public class MakeSound : MonoBehaviour
         backGround.material.color = new Color(x_axis, y_axis, z_axis);
 
         //remap values to handpicked effect parameters
-        float delayData = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.7f);
-        float reverbData1 = Remap(z_axis, 0.0f, 1.0f, 0.0f, 0.2f);
-        float reverbData2 = Remap(z_axis, 0.0f, 1.0f, 0.0f, 0.4f);
-        float filterData1 = Remap(x_axis, 0.0f, 1.0f, 10.0f, 10000.0f);
-        float filterData2 = Remap(x_axis, 0.0f, 1.0f, 0.0f, 30.0f);
-        Debug.Log("delay =" + delayData + "reverb1 =" + reverbData1 + "reverb2 =" + reverbData2 + "filter1 =" + filterData1 + "filter2 =" + filterData2);
+        float delayData = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.7f);
+        float reverbData1 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.2f);
+        float reverbData2 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.4f);
+        float filterData1 = Remap(z_axis, 0.0f, 1.0f, 10.0f, 10000.0f);
+        float filterData2 = Remap(z_axis, 0.0f, 1.0f, 0.0f, 30.0f);
+        //Debug.Log("delay =" + delayData + "reverb1 =" + reverbData1 + "reverb2 =" + reverbData2 + "filter1 =" + filterData1 + "filter2 =" + filterData2);
 
         //send values to chuck
-        myFloatSyncer.SetNewValue(delayData);
+        myChuck.SetFloat("myDelayGain", delayData);
         myChuck.SetFloat("myReverbGain1", reverbData1);
         myChuck.SetFloat("myReverbGain2", reverbData2);
         myChuck.SetFloat("myFilterFreq", filterData1);
