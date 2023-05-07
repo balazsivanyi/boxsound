@@ -44,6 +44,7 @@
      <Compile Include="Assets/Chunity/Scripts/Examples/ChunityExampleStopScript.cs" />
      <Compile Include="Assets/Chunity/Scripts/Utility/TheChuck.cs" />
      <Compile Include="Assets/Chunity/Scripts/Examples/ChunityExampleGlobalEvent.cs" />
+     <Compile Include="Assets/Scripts/LooperManager.cs" />
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
      <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeA.cs" />
      <Compile Include="Assets/Scripts/RecordAudio.cs" />

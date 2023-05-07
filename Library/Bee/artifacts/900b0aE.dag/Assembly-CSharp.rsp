@@ -391,6 +391,7 @@
 "Assets/Chunity/Scripts/Utility/TheChuck.cs"
 "Assets/Scripts/AccelerometerData.cs"
 "Assets/Scripts/AudioAnalyzer.cs"
+"Assets/Scripts/LooperManager.cs"
 "Assets/Scripts/MakeSound.cs"
 "Assets/Scripts/RecordAudio.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

@@ -18,56 +18,22 @@ public class RecordAudio : MonoBehaviour
 
     private bool shouldUpdate = false;
 
-    ChuckSubInstance myChuck;
+    //calling in loopermanager script
+    LooperManager looper;
+
+    private string currentButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //get exact button component
-        body = transform.Find("Body").GetComponent<Image>();
+        body = transform.Find("Body").GetComponent<Image>(); 
 
-        myChuck = GetComponent<ChuckSubInstance>();
-  
-        myChuck.RunCode(@"
-            //a simple signal path
-            adc => LiSa loopme => dac;
+        //get looper script from parent
+        looper = GetComponentInParent<LooperManager>();
 
-            //gotta tell LiSa how much memory to allocate
-            //alloc memory
-            2::second => loopme.duration;
-            10::ms => loopme.recRamp;
-
-            global Event letsRecord;
-            global Event letsPlayBack;
-
-            fun void recordSound() {
-                //start recording input
-                loopme.record(1);
-                //begin ramping down
-                1600::ms => now;
-                400::ms => loopme.recRamp;
-                //wait for ramp to finish, then stop recording
-                400::ms => now;
-                loopme.record(0);
-            }
-
-            fun void playRecording() {
-                //set playback rate
-                1 => loopme.rate;
-                1 => loopme.loop;
-                //1 => loopme.bi;
-                1 => loopme.play;
-                while(true) {500::ms => now;}
-            }
-            while (true) {
-                
-                letsRecord => now;
-                recordSound();
-                
-                letsPlayBack => now;
-                playRecording();
-            }
-        "); 
+        currentButton = gameObject.name;
 
     }
 
@@ -92,7 +58,7 @@ public class RecordAudio : MonoBehaviour
                     progressBar.fillAmount = timer;
 
                     //start rercording audio
-                    myChuck.BroadcastEvent("letsRecord");
+                    looper.recordAudio(currentButton);
                     if (timer >= 1.0)
                     {
                         timer = timerMax;
@@ -100,7 +66,8 @@ public class RecordAudio : MonoBehaviour
                         progressBar.enabled = false;
                         //do something when progress is done -> send recorded audio to sequencer
                         Debug.Log("event triggered");
-                        myChuck.BroadcastEvent("letsPlayBack");
+                        //play loop back
+                        looper.playAudio(currentButton);
 
                     }
                     //else just delete reecorded audio
