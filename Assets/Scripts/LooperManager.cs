@@ -5,8 +5,10 @@ using UnityEngine;
 public class LooperManager : MonoBehaviour
 {
     ChuckSubInstance myChuck;
+    ChuckFloatSyncer myFloatSyncer;
 
     string[] buttons = {"BottomRightButton", "BottomLeftButton", "TopRightButton", "TopLeftButton"};
+    string[] sliders = {"Pitch", "Volume", "Filter"};
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,12 @@ public class LooperManager : MonoBehaviour
             10::ms => loopme3.recRamp;
             10::ms => loopme4.recRamp;
 
+            //global effect params
+            global float myPitch;
+            global float myVolume;
+            global float myFilter;
+
+            
             
 
             fun void recordSound1(Event start) {
@@ -49,7 +57,7 @@ public class LooperManager : MonoBehaviour
             fun void playRecording1(Event start) {
                 start => now;
                 //set playback rate
-                1 => loopme1.rate;
+                myPitch => loopme1.rate;
                 1 => loopme1.loop;
                 //1 => loopme1.bi;
                 1 => loopme1.play;
@@ -140,9 +148,7 @@ public class LooperManager : MonoBehaviour
 
             while (true) 
             {
-                2::second => now;
-
-                spork ~recordSound1(letsRecord1);
+                spork ~ recordSound1(letsRecord1);
                 spork ~ playRecording1(letsPlayBack1);
 
                 spork ~ recordSound2(letsRecord2);
@@ -154,8 +160,19 @@ public class LooperManager : MonoBehaviour
                 spork ~ recordSound4(letsRecord4);
                 spork ~ playRecording4(letsPlayBack4);
 
+                2::second => now;
+
             }
         ");
+
+        // create a callback to use with GetFloar in Update()
+        myFloatSyncer = gameObject.AddComponent<ChuckFloatSyncer>();
+
+        // start syncing effect parameters
+        myFloatSyncer.SyncFloat(myChuck, "myPitch"); //delay gain
+        myFloatSyncer.SyncFloat(myChuck, "myVolume"); //reverb1 gain
+        myFloatSyncer.SyncFloat(myChuck, "myFilter"); //reverb2 gain
+        
         
     }
 
@@ -193,6 +210,23 @@ public class LooperManager : MonoBehaviour
         } else if (button == buttons[3])
         {
             myChuck.BroadcastEvent("letsPlayBack4");
+        }
+    }
+
+    //TODO: add that it knows which big button we'ree talkiing about, and then seeet specific affeects throuugh that (probably other argument in effectmanager for checking the parent button gameobject name)
+    //      figure out how to set the proper effects in the chuck script -> inside playback or global?
+     public void setEffect(string slider, float value) {
+        if (slider == sliders[0]) {
+            //set pitch
+            myChuck.SetFloat("myPitch", value);
+        } else if (slider == sliders[1])
+        {
+            //set volume
+            myChuck.SetFloat("myVolume", value);
+        } else if (slider == sliders[2])
+        {
+            //set filter
+            myChuck.SetFloat("myFilter", value);
         }
     }
 }
