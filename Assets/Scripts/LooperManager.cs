@@ -8,7 +8,7 @@ public class LooperManager : MonoBehaviour
     ChuckFloatSyncer myFloatSyncer;
 
     string[] buttons = {"BottomRightButton", "BottomLeftButton", "TopRightButton", "TopLeftButton"};
-    string[] sliders = {"Pitch", "Volume", "Filter"};
+    string[] sliders = {"Pitch1", "Volume1", "Filter1", "Pitch2", "Volume2", "Filter2", "Pitch3", "Volume3", "Filter3", "Pitch4", "Volume4", "Filter4",};
 
     // Start is called before the first frame update
     void Start()
@@ -286,48 +286,48 @@ public class LooperManager : MonoBehaviour
                       
             }
         } else if (button == buttons[1]) {
-            if (slider == sliders[0]) {
+            if (slider == sliders[3]) {
                 //set pitch
                 myChuck.SetFloat("myPitch2", value);
                         
-            } else if (slider == sliders[1])
+            } else if (slider == sliders[4])
             {
                 //set volume
                 myChuck.SetFloat("myVolume2", value);
                         
-            } else if (slider == sliders[2])
+            } else if (slider == sliders[5])
             {
                 //set filter
                 myChuck.SetFloat("myFilter2", value);
                           
             }
         } else if (button == buttons[2]) {
-            if (slider == sliders[0]) {
+            if (slider == sliders[6]) {
                 //set pitch
                 myChuck.SetFloat("myPitch3", value);
                            
-            } else if (slider == sliders[1])
+            } else if (slider == sliders[7])
             {
                 //set volume
                 myChuck.SetFloat("myVolume3", value);
                             
-            } else if (slider == sliders[2])
+            } else if (slider == sliders[8])
             {
                 //set filter
                 myChuck.SetFloat("myFilter3", value);
                             
             }
         } else if (button == buttons[3]) {    
-            if (slider == sliders[0]) {
+            if (slider == sliders[9]) {
                 //set pitch
                 myChuck.SetFloat("myPitch4", value);
                               
-            } else if (slider == sliders[1])
+            } else if (slider == sliders[10])
             {
                 //set volume
                 myChuck.SetFloat("myVolume4", value);
                                
-            } else if (slider == sliders[2])
+            } else if (slider == sliders[11])
             {
                 //set filter
                 myChuck.SetFloat("myFilter4", value);

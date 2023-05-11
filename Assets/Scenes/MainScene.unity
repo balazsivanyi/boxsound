@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5482489}
   - component: {fileID: 5482490}
   m_Layer: 5
-  m_Name: Filter
+  m_Name: Volume2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,9 +209,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 5000
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 2500
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 7152833}
   - component: {fileID: 7152834}
   m_Layer: 5
-  m_Name: Filter
+  m_Name: Volume4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,9 +313,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 5000
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 2500
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -549,13 +549,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 108644840}
-    - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1146019243}
     - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5482488}
+    - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 108644840}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
 --- !u!1 &97746584
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 108644841}
   - component: {fileID: 108644842}
   m_Layer: 5
-  m_Name: Pitch
+  m_Name: Filter2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,10 +870,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 496745231}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_MinValue: -2
-  m_MaxValue: 4
+  m_MinValue: 0
+  m_MaxValue: 5000
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 2500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1006,7 +1006,7 @@ GameObject:
   - component: {fileID: 155738279}
   - component: {fileID: 155738280}
   m_Layer: 5
-  m_Name: Filter
+  m_Name: Volume1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1080,9 +1080,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 5000
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 2500
+  m_Value: 0.56
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 409668455}
   - component: {fileID: 409668456}
   m_Layer: 5
-  m_Name: Filter
+  m_Name: Volume3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1562,9 +1562,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 5000
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 2500
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1947,7 +1947,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.5
+  m_FillAmount: 0.56
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 636441146}
   - component: {fileID: 636441147}
   m_Layer: 5
-  m_Name: Pitch
+  m_Name: Pitch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2782,7 +2782,7 @@ GameObject:
   - component: {fileID: 842636683}
   - component: {fileID: 842636684}
   m_Layer: 5
-  m_Name: Pitch
+  m_Name: Filter3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2855,10 +2855,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1679099038}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_MinValue: -2
-  m_MaxValue: 4
+  m_MinValue: 0
+  m_MaxValue: 5000
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 2500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3114,7 +3114,7 @@ GameObject:
   - component: {fileID: 890748013}
   - component: {fileID: 890748014}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: Filter4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3188,9 +3188,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 5000
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 2500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3614,7 +3614,7 @@ GameObject:
   - component: {fileID: 1130841553}
   - component: {fileID: 1130841554}
   m_Layer: 5
-  m_Name: Pitch
+  m_Name: Pitch4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3755,7 +3755,7 @@ GameObject:
   - component: {fileID: 1146019244}
   - component: {fileID: 1146019245}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: Pitch2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3828,10 +3828,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 883694683}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -2
+  m_MaxValue: 4
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4443,7 +4443,7 @@ GameObject:
   - component: {fileID: 1455013696}
   - component: {fileID: 1455013697}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: Filter1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4517,9 +4517,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 5000
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 2500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4969,7 +4969,7 @@ GameObject:
   - component: {fileID: 1719806485}
   - component: {fileID: 1719806486}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: Pitch3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5042,10 +5042,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1409540429}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -2
+  m_MaxValue: 4
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5667,9 +5667,9 @@ PrefabInstance:
       addedObject: {fileID: 636441145}
     - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1455013695}
+      addedObject: {fileID: 155738278}
     - targetCorrespondingSourceObject: {fileID: 157651924768074805, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 155738278}
+      addedObject: {fileID: 1455013695}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e0221012c2f4e66b98cd18bfc4bee0, type: 3}
