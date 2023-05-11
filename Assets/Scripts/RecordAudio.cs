@@ -49,7 +49,6 @@ public class RecordAudio : MonoBehaviour
             {
                 if (touch.phase == TouchPhase.Stationary) 
                 {
-                    Debug.Log("Touch Pressed");
                     shouldUpdate = false;
                     
                     timer += Time.deltaTime;
@@ -65,7 +64,6 @@ public class RecordAudio : MonoBehaviour
                         progressBar.fillAmount = timerMax;
                         progressBar.enabled = false;
                         //do something when progress is done -> send recorded audio to sequencer
-                        Debug.Log("event triggered");
                         //play loop back
                         looper.playAudio(currentButton);
 
@@ -93,7 +91,6 @@ public class RecordAudio : MonoBehaviour
         
         if (Input.touchCount == 0)
         {
-            Debug.Log("Touch Lifted/Released");
             shouldUpdate = true;
         }
     }

@@ -16,31 +16,42 @@ public class LooperManager : MonoBehaviour
         myChuck = GetComponent<ChuckSubInstance>();
         myChuck.RunCode(@"
             //a simple signal path
-            adc => LiSa loopme1 => dac;
-            adc => LiSa loopme2 => dac;
-            adc => LiSa loopme3 => dac;
-            adc => LiSa loopme4 => dac;
+            adc => LiSa loopme1 => LPF filter1 => dac;
+            adc => LiSa loopme2 => LPF filter2 => dac;
+            adc => LiSa loopme3 => LPF filter3 => dac;
+            adc => LiSa loopme4 => LPF filter4 => dac;
 
-            //gotta tell LiSa how much memory to allocate
-            //alloc memory
+            //sampler setup
+            //allocating memory ini timie
             2::second => loopme2.duration;
             2::second => loopme1.duration;
             2::second => loopme3.duration;
             2::second => loopme4.duration;
-
+            //ramping for the edges of the recording so it doesn't clip
             10::ms => loopme1.recRamp;
             10::ms => loopme2.recRamp;
             10::ms => loopme3.recRamp;
             10::ms => loopme4.recRamp;
 
-            //global effect params
-            global float myPitch;
-            global float myVolume;
-            global float myFilter;
+            //global effect parameters
+            1 => global float myPitch1;
+            0.5 => global float myVolume1;
+            10000 => global float myFilter1;
 
+            1 => global float myPitch2;
+            0.5 => global float myVolume2;
+            10000 => global float myFilter2;
             
-            
+            1 => global float myPitch3;
+            0.5 => global float myVolume3;
+            10000 => global float myFilter3;
 
+            1 => global float myPitch4;
+            0.5 => global float myVolume4;
+            10000 => global float myFilter4;
+
+
+        
             fun void recordSound1(Event start) {
                 start => now;
                 //loopme1.clear();
@@ -56,8 +67,11 @@ public class LooperManager : MonoBehaviour
 
             fun void playRecording1(Event start) {
                 start => now;
-                //set playback rate
-                myPitch => loopme1.rate;
+                //set effeect parameters
+                myPitch1 => loopme1.rate;
+                myVolume1 => loopme1.gain;
+                myFilter1 => filter1.freq;
+                //start looping
                 1 => loopme1.loop;
                 //1 => loopme1.bi;
                 1 => loopme1.play;
@@ -79,7 +93,11 @@ public class LooperManager : MonoBehaviour
 
             fun void playRecording2(Event start) {
                 start => now;
-                //set playback rate
+                //set effeect parameters
+                myPitch2 => loopme2.rate;
+                myVolume2 => loopme2.gain;
+                myFilter2 => filter2.freq;
+                //start looping
                 1 => loopme2.rate;
                 1 => loopme2.loop;
                 //1 => loopme2.bi;
@@ -102,7 +120,11 @@ public class LooperManager : MonoBehaviour
 
             fun void playRecording3(Event start) {
                 start => now;
-                //set playback rate
+                //set effeect parameters
+                myPitch3 => loopme3.rate;
+                myVolume3 => loopme3.gain;
+                myFilter3 => filter3.freq;
+                //start looping
                 1 => loopme3.rate;
                 1 => loopme3.loop;
                 //1 => loopme3.bi;
@@ -125,7 +147,11 @@ public class LooperManager : MonoBehaviour
 
             fun void playRecording4(Event start) {
                 start => now;
-                //set playback rate
+                //set effeect parameters
+                myPitch4 => loopme4.rate;
+                myVolume4 => loopme4.gain;
+                myFilter4 => filter4.freq;
+                //start looping
                 1 => loopme4.rate;
                 1 => loopme4.loop;
                 //1 => loopme4.bi;
@@ -150,15 +176,27 @@ public class LooperManager : MonoBehaviour
             {
                 spork ~ recordSound1(letsRecord1);
                 spork ~ playRecording1(letsPlayBack1);
+                myPitch1 => loopme1.rate;
+                myVolume1 => loopme1.gain;
+                myFilter1 => filter1.freq;
 
                 spork ~ recordSound2(letsRecord2);
                 spork ~ playRecording2(letsPlayBack2);
+                myPitch2 => loopme2.rate;
+                myVolume2 => loopme2.gain;
+                myFilter2 => filter2.freq;
 
                 spork ~ recordSound3(letsRecord3);
                 spork ~ playRecording3(letsPlayBack3);
+                myPitch3 => loopme3.rate;
+                myVolume3 => loopme3.gain;
+                myFilter3 => filter3.freq;
 
                 spork ~ recordSound4(letsRecord4);
                 spork ~ playRecording4(letsPlayBack4);
+                myPitch4 => loopme4.rate;
+                myVolume4 => loopme4.gain;
+                myFilter4 => filter4.freq;
 
                 2::second => now;
 
@@ -169,9 +207,21 @@ public class LooperManager : MonoBehaviour
         myFloatSyncer = gameObject.AddComponent<ChuckFloatSyncer>();
 
         // start syncing effect parameters
-        myFloatSyncer.SyncFloat(myChuck, "myPitch"); //delay gain
-        myFloatSyncer.SyncFloat(myChuck, "myVolume"); //reverb1 gain
-        myFloatSyncer.SyncFloat(myChuck, "myFilter"); //reverb2 gain
+        myFloatSyncer.SyncFloat(myChuck, "myPitch1"); 
+        myFloatSyncer.SyncFloat(myChuck, "myVolume1");
+        myFloatSyncer.SyncFloat(myChuck, "myFilter1");
+
+        myFloatSyncer.SyncFloat(myChuck, "myPitch2"); 
+        myFloatSyncer.SyncFloat(myChuck, "myVolume2");
+        myFloatSyncer.SyncFloat(myChuck, "myFilter2");
+
+        myFloatSyncer.SyncFloat(myChuck, "myPitch3"); 
+        myFloatSyncer.SyncFloat(myChuck, "myVolume3");
+        myFloatSyncer.SyncFloat(myChuck, "myFilter3");
+
+        myFloatSyncer.SyncFloat(myChuck, "myPitch4"); 
+        myFloatSyncer.SyncFloat(myChuck, "myVolume4");
+        myFloatSyncer.SyncFloat(myChuck, "myFilter4");
         
         
     }
@@ -185,22 +235,26 @@ public class LooperManager : MonoBehaviour
     public void recordAudio(string button) {
         if (button == buttons[0]) {
             myChuck.BroadcastEvent("letsRecord1");
+              
         } else if (button == buttons[1])
         {
             myChuck.BroadcastEvent("letsRecord2");
+             
         } else if (button == buttons[2])
         {
             myChuck.BroadcastEvent("letsRecord3");
+               
         } else if (button == buttons[3])
         {
             myChuck.BroadcastEvent("letsRecord4");
-            
+                
         }
     }
 
     public void playAudio(string button) {
         if (button == buttons[0]) {
             myChuck.BroadcastEvent("letsPlayBack1");
+            Debug.Log("audio playing");
         } else if (button == buttons[1])
         {
             myChuck.BroadcastEvent("letsPlayBack2");
@@ -213,20 +267,78 @@ public class LooperManager : MonoBehaviour
         }
     }
 
-    //TODO: add that it knows which big button we'ree talkiing about, and then seeet specific affeects throuugh that (probably other argument in effectmanager for checking the parent button gameobject name)
-    //      figure out how to set the proper effects in the chuck script -> inside playback or global?
-     public void setEffect(string slider, float value) {
-        if (slider == sliders[0]) {
-            //set pitch
-            myChuck.SetFloat("myPitch", value);
-        } else if (slider == sliders[1])
-        {
-            //set volume
-            myChuck.SetFloat("myVolume", value);
-        } else if (slider == sliders[2])
-        {
-            //set filter
-            myChuck.SetFloat("myFilter", value);
+    //figure out how to set the proper effects in the chuck script -> inside playback or global?
+     public void setEffect(string button, string slider, float value) {
+        if (button == buttons[0]) {
+            if (slider == sliders[0]) {
+                //set pitch
+                myChuck.SetFloat("myPitch1", value);
+                     
+            } else if (slider == sliders[1])
+            {
+                //set volume
+                myChuck.SetFloat("myVolume1", value);
+                      
+            } else if (slider == sliders[2])
+            {
+                //set filter
+                myChuck.SetFloat("myFilter1", value);
+                      
+            }
+        } else if (button == buttons[1]) {
+            if (slider == sliders[0]) {
+                //set pitch
+                myChuck.SetFloat("myPitch2", value);
+                        
+            } else if (slider == sliders[1])
+            {
+                //set volume
+                myChuck.SetFloat("myVolume2", value);
+                        
+            } else if (slider == sliders[2])
+            {
+                //set filter
+                myChuck.SetFloat("myFilter2", value);
+                          
+            }
+        } else if (button == buttons[2]) {
+            if (slider == sliders[0]) {
+                //set pitch
+                myChuck.SetFloat("myPitch3", value);
+                           
+            } else if (slider == sliders[1])
+            {
+                //set volume
+                myChuck.SetFloat("myVolume3", value);
+                            
+            } else if (slider == sliders[2])
+            {
+                //set filter
+                myChuck.SetFloat("myFilter3", value);
+                            
+            }
+        } else if (button == buttons[3]) {    
+            if (slider == sliders[0]) {
+                //set pitch
+                myChuck.SetFloat("myPitch4", value);
+                              
+            } else if (slider == sliders[1])
+            {
+                //set volume
+                myChuck.SetFloat("myVolume4", value);
+                               
+            } else if (slider == sliders[2])
+            {
+                //set filter
+                myChuck.SetFloat("myFilter4", value);
+                                
+            }
         }
+    }
+    
+    private float Remap(float aValue, float aIn1, float aIn2, float aOut1, float aOut2)
+    {
+        float t = (aValue - aIn1) / (aIn2 - aIn1);
+        return aOut1 + (aOut2 - aOut1) * t;
     }
 }

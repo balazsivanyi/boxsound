@@ -7,16 +7,25 @@ public class SmallEffectManager : MonoBehaviour
 {
 
     LooperManager looper;
-    public Slider slider;
-    private string currentButton;
-
+    private Slider slider;
+    private string currentSlider;
+    private string parentButton;
     private float sliderValue;
     
     // Start is called before the first frame update
     void Start()
     {
+        currentSlider = gameObject.name;
+        parentButton = transform.parent.gameObject.name;
+
         looper = GetComponentInParent<LooperManager>();
-        currentButton = gameObject.name;
+        slider = GameObject.Find(currentSlider).GetComponent<Slider>();
+
+        //OnSliderValueChanged();
+        slider.onValueChanged.AddListener((value) => {
+            Debug.Log(currentSlider);
+            looper.setEffect(parentButton, currentSlider, value);
+        });
     }
 
     // Update is called once per frame
@@ -28,6 +37,7 @@ public class SmallEffectManager : MonoBehaviour
      public void OnSliderValueChanged()
     {
         sliderValue = slider.value;
-        looper.setEffect(currentButton, sliderValue);
+        Debug.Log(sliderValue);
+        looper.setEffect(parentButton, currentSlider, sliderValue);
     }
 }
