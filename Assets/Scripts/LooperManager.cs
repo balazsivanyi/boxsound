@@ -11,8 +11,8 @@ public class LooperManager : MonoBehaviour
     string[] sliders = {"Pitch1", "Volume1", "Filter1", "Pitch2", "Volume2", "Filter2", "Pitch3", "Volume3", "Filter3", "Pitch4", "Volume4", "Filter4"};
 
     //accelerometer variables
-    /* private Vector3 smoothedAccelerometerData;
-    public float smoothingValue = 0.2f; */
+    private Vector3 smoothedAccelerometerData;
+    public float smoothingValue = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -71,18 +71,21 @@ public class LooperManager : MonoBehaviour
 
             //global effect parameters
             //reverb
-            0.1 => reverb1.mix;
-            0.1 => reverb2.mix;
-            0.1 => reverb3.mix;
-            0.1 => reverb4.mix;
+            global float myReverb;
+            myReverb => reverb1.mix;
+            myReverb => reverb2.mix;
+            myReverb => reverb3.mix;
+            myReverb => reverb4.mix;
             
             //delay
+            global float myDelay1;
+            global float myDelay2;
             0.1::second => delay1.max => delay1.delay;
             0.1::second => delay2.max => delay2.delay;
             0.1::second => delay3.max => delay3.delay;
             0.1::second => delay4.max => delay4.delay;
             // set feedback
-            0.1 => feedback.gain;
+            myDelay2 => feedback.gain;
             // set effects mix
             0.75 => delay1.gain;
             0.75 => delay2.gain;
@@ -90,10 +93,11 @@ public class LooperManager : MonoBehaviour
             0.75 => delay4.gain;
 
             //distortion
-            0.9 => osc1.gain;
-            0.9 => osc2.gain;
-            0.9 => osc3.gain;
-            0.9 => osc4.gain;
+            global float myDistortion;
+            myDistortion => osc1.gain;
+            myDistortion => osc2.gain;
+            myDistortion => osc3.gain;
+            myDistortion => osc4.gain;
             3 => metalGain1.op;
             3 => metalGain2.op;
             3 => metalGain3.op;
@@ -253,7 +257,7 @@ public class LooperManager : MonoBehaviour
         // create a callback to use with GetFloar in Update()
         myFloatSyncer = gameObject.AddComponent<ChuckFloatSyncer>();
 
-        // start syncing effect parameters
+        // start syncing individual effect parameters
         myFloatSyncer.SyncFloat(myChuck, "myPitch1"); 
         myFloatSyncer.SyncFloat(myChuck, "myVolume1");
         myFloatSyncer.SyncFloat(myChuck, "myFilter1");
@@ -269,14 +273,19 @@ public class LooperManager : MonoBehaviour
         myFloatSyncer.SyncFloat(myChuck, "myPitch4"); 
         myFloatSyncer.SyncFloat(myChuck, "myVolume4");
         myFloatSyncer.SyncFloat(myChuck, "myFilter4");
-        
-        
+
+        // start syncing global effects parameters
+        myFloatSyncer.SyncFloat(myChuck, "myDelay1"); 
+        myFloatSyncer.SyncFloat(myChuck, "myDelay2");
+        myFloatSyncer.SyncFloat(myChuck, "myReverb");
+        myFloatSyncer.SyncFloat(myChuck, "myDistortion");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //AccelerometerDataHandler();
+        AccelerometerDataHandler();
     }
 
     public void recordAudio(string button) {
@@ -383,7 +392,7 @@ public class LooperManager : MonoBehaviour
         }
     }
 
-    /* public void AccelerometerDataHandler() {
+    public void AccelerometerDataHandler() {
         // Get accelerometer data
         Vector3 accelerometerData = Input.acceleration;
 
@@ -397,20 +406,18 @@ public class LooperManager : MonoBehaviour
         //Debug.Log("x-value: " + x_axis + "y-value: "+ y_axis + "z-value: " + z_axis);
 
         //remap values to handpicked effect parameters
-        float delayData = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.7f);
-        float reverbData1 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.2f);
-        float reverbData2 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.4f);
-        float filterData1 = Remap(z_axis, 0.0f, 1.0f, 10.0f, 10000.0f);
-        float filterData2 = Remap(z_axis, 0.0f, 1.0f, 0.0f, 30.0f);
+        float delayData1 = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.8f);
+        float delayData2 = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.7f);
+        float reverbData = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.5f);
+        float distortionData = Remap(z_axis, 0.0f, 1.0f, 0.0f, 0.9f);
         //Debug.Log("delay =" + delayData + "reverb1 =" + reverbData1 + "reverb2 =" + reverbData2 + "filter1 =" + filterData1 + "filter2 =" + filterData2);
 
         //send values to chuck
-        myChuck.SetFloat("myDelayGain", delayData);
-        myChuck.SetFloat("myReverbGain1", reverbData1);
-        myChuck.SetFloat("myReverbGain2", reverbData2);
-        myChuck.SetFloat("myFilterFreq", filterData1);
-        myChuck.SetFloat("myFilterRes", filterData2);
-    } */
+        myChuck.SetFloat("myDelay1", delayData1);
+        myChuck.SetFloat("myDelay2", delayData2);
+        myChuck.SetFloat("myReverb", reverbData);
+        myChuck.SetFloat("myDistortion", distortionData);   
+    }
     
     private float Remap(float aValue, float aIn1, float aIn2, float aOut1, float aOut2)
     {
