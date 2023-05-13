@@ -56,7 +56,7 @@ public class MakeSound : MonoBehaviour
                 env2 => Delay delay2 => dac;
                 delay2 => delay2;
 
-                (4::ms, beat / 8, 0, 1::ms) => env2.set;
+                (4::ms, beat / 8, 0, 1::ms) => env2.set;        
                 0.7 => osc2.gain;
 
                 beat => delay2.max;

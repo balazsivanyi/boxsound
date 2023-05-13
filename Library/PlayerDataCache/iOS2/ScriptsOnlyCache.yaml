@@ -5,6 +5,7 @@ ScriptsOnlyBuild:
     - ChuckSubInstance
     - LooperManager
     - RecordAudio
+    - SmallEffectManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro:
@@ -13,8 +14,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
-    Unity.TextMeshPro.dll:
-    - TMPro.TMP_FontAsset
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -25,6 +24,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
   serializedClasses:
     Unity.TextMeshPro:
     - TMPro.FaceInfo_Legacy
@@ -48,7 +48,12 @@ ScriptsOnlyBuild:
     - UnityEngine.TextCore.GlyphMetrics
     - UnityEngine.TextCore.GlyphRect
     UnityEngine.UI:
+    - UnityEngine.UI.AnimationTriggers
+    - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+    - UnityEngine.UI.Navigation
+    - UnityEngine.UI.Slider/SliderEvent
+    - UnityEngine.UI.SpriteState
   methodsToPreserve: []
   sceneClasses:
     Assets/Scenes/MainScene.unity:
@@ -79,31 +84,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1596}
     - Class: 114
-      Script: {instanceID: 2194}
+      Script: {instanceID: 1988}
     - Class: 114
-      Script: {instanceID: 2632}
+      Script: {instanceID: 2196}
     - Class: 114
-      Script: {instanceID: 2844}
+      Script: {instanceID: 2634}
     - Class: 114
-      Script: {instanceID: 4066}
+      Script: {instanceID: 2846}
     - Class: 114
-      Script: {instanceID: 4184}
+      Script: {instanceID: 3620}
     - Class: 114
-      Script: {instanceID: 4442}
+      Script: {instanceID: 4068}
     - Class: 114
-      Script: {instanceID: 5058}
+      Script: {instanceID: 4186}
     - Class: 114
-      Script: {instanceID: 5180}
+      Script: {instanceID: 4444}
     - Class: 114
-      Script: {instanceID: 5774}
+      Script: {instanceID: 5060}
     - Class: 114
-      Script: {instanceID: 6264}
+      Script: {instanceID: 5102}
     - Class: 114
-      Script: {instanceID: 6324}
+      Script: {instanceID: 5182}
     - Class: 114
-      Script: {instanceID: 7140}
+      Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 8126}
+      Script: {instanceID: 6266}
+    - Class: 114
+      Script: {instanceID: 6326}
+    - Class: 114
+      Script: {instanceID: 7142}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -199,6 +208,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: SimpleScript
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: LooperManager
   - hash:
       serializedVersion: 2
       Hash: 83f39633af7af576fd4f4d38284f9dc8
@@ -430,12 +445,6 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: AccelerometerData
-  - hash:
-      serializedVersion: 2
-      Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnInputFieldValueChangedMessageListener
@@ -535,6 +544,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionExit2DMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SmallEffectManager
   - hash:
       serializedVersion: 2
       Hash: e4838e31353e3c18c344704814443f83
@@ -1369,13 +1384,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 751e5bae2a317288c2ab58d66687092b
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: LooperManager
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity
-  playerPath: /Users/balazsivanyi/AAU/MSc/4th_semester/builds/build8
+  playerPath: /Users/balazsivanyi/AAU/MSc/4th_semester/builds/build9

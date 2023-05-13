@@ -8,7 +8,7 @@ public class RecordAudio : MonoBehaviour
 {
     //timer variables (change later)
     private float timer = 0.0f;
-    private float timerMax = 1.0f;
+    private float timerMax = 4.0f;
     
     //calling progress bar
     [SerializeField] private Image progressBar = null;
@@ -54,11 +54,11 @@ public class RecordAudio : MonoBehaviour
                     timer += Time.deltaTime;
 
                     progressBar.enabled = true;
-                    progressBar.fillAmount = timer;
+                    progressBar.fillAmount = timer / 4;
 
-                    //start rercording audio
+                    //start rercording audio 
                     looper.recordAudio(currentButton);
-                    if (timer >= 1.0)
+                    if (timer >= 4.0)
                     {
                         timer = timerMax;
                         progressBar.fillAmount = timerMax;
@@ -77,7 +77,7 @@ public class RecordAudio : MonoBehaviour
             if (shouldUpdate)
             {
                 timer -= Time.deltaTime;
-                progressBar.fillAmount = timer;
+                progressBar.fillAmount = timer / 4;
 
                 if (timer <= 0.0)
                 {

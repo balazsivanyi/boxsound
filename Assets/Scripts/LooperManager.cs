@@ -8,32 +8,51 @@ public class LooperManager : MonoBehaviour
     ChuckFloatSyncer myFloatSyncer;
 
     string[] buttons = {"BottomRightButton", "BottomLeftButton", "TopRightButton", "TopLeftButton"};
-    string[] sliders = {"Pitch1", "Volume1", "Filter1", "Pitch2", "Volume2", "Filter2", "Pitch3", "Volume3", "Filter3", "Pitch4", "Volume4", "Filter4",};
+    string[] sliders = {"Pitch1", "Volume1", "Filter1", "Pitch2", "Volume2", "Filter2", "Pitch3", "Volume3", "Filter3", "Pitch4", "Volume4", "Filter4"};
+
+    //accelerometer variables
+    /* private Vector3 smoothedAccelerometerData;
+    public float smoothingValue = 0.2f; */
 
     // Start is called before the first frame update
     void Start()
     {
         myChuck = GetComponent<ChuckSubInstance>();
         myChuck.RunCode(@"
-            //a simple signal path
-            adc => LiSa loopme1 => LPF filter1 => dac;
-            adc => LiSa loopme2 => LPF filter2 => dac;
-            adc => LiSa loopme3 => LPF filter3 => dac;
-            adc => LiSa loopme4 => LPF filter4 => dac;
+            //Button 1 looper
+            adc => LiSa loopme1 => Gain g1 => LPF filter1 => NRev reverb1 => dac;
+                                        g1 => Gain feedback => DelayL delay1 => g1;
+                        loopme1 => Gain metalGain1 => delay1 => reverb1;
+                        SinOsc osc1 => metalGain1;
+            //Button 2 looper
+            adc => LiSa loopme2 => Gain g2 => LPF filter2 => NRev reverb2 => dac;
+                                        g2 => feedback => DelayL delay2 => g2;
+                        loopme2 => Gain metalGain2 => delay2 => reverb2;
+                        SinOsc osc2 => metalGain2;
+            //Button 3 looper
+            adc => LiSa loopme3 => Gain g3 => LPF filter3 => NRev reverb3 => dac;
+                                        g3 => feedback => DelayL delay3 => g3;
+                        loopme3 => Gain metalGain3 => delay3 => reverb3;
+                        SinOsc osc3 => metalGain3;
+            //Button 4 looper
+            adc => LiSa loopme4 => Gain g4 => LPF filter4 => NRev reverb4 => dac;
+                                        g4 => feedback => DelayL delay4 => g4;
+                        loopme4 => Gain metalGain4 => delay4 => reverb4;
+                        SinOsc osc4 => metalGain4;
 
             //sampler setup
-            //allocating memory ini timie
-            2::second => loopme2.duration;
-            2::second => loopme1.duration;
-            2::second => loopme3.duration;
-            2::second => loopme4.duration;
+            //allocating memory in time
+            4::second => loopme2.duration;
+            4::second => loopme1.duration;
+            4::second => loopme3.duration;
+            4::second => loopme4.duration;
             //ramping for the edges of the recording so it doesn't clip
             10::ms => loopme1.recRamp;
             10::ms => loopme2.recRamp;
             10::ms => loopme3.recRamp;
             10::ms => loopme4.recRamp;
 
-            //global effect parameters
+            //individual effect parameters
             1 => global float myPitch1;
             0.5 => global float myVolume1;
             10000 => global float myFilter1;
@@ -50,15 +69,43 @@ public class LooperManager : MonoBehaviour
             0.5 => global float myVolume4;
             10000 => global float myFilter4;
 
+            //global effect parameters
+            //reverb
+            0.1 => reverb1.mix;
+            0.1 => reverb2.mix;
+            0.1 => reverb3.mix;
+            0.1 => reverb4.mix;
+            
+            //delay
+            0.1::second => delay1.max => delay1.delay;
+            0.1::second => delay2.max => delay2.delay;
+            0.1::second => delay3.max => delay3.delay;
+            0.1::second => delay4.max => delay4.delay;
+            // set feedback
+            0.1 => feedback.gain;
+            // set effects mix
+            0.75 => delay1.gain;
+            0.75 => delay2.gain;
+            0.75 => delay3.gain;
+            0.75 => delay4.gain;
 
-        
+            //distortion
+            0.9 => osc1.gain;
+            0.9 => osc2.gain;
+            0.9 => osc3.gain;
+            0.9 => osc4.gain;
+            3 => metalGain1.op;
+            3 => metalGain2.op;
+            3 => metalGain3.op;
+            3 => metalGain4.op;
+
             fun void recordSound1(Event start) {
                 start => now;
                 //loopme1.clear();
                 //start recording input
                 loopme1.record(1);
                 //begin ramping down
-                1600::ms => now;
+                3600::ms => now;
                 400::ms => loopme1.recRamp;
                 //wait for ramp to finish, then stop recording
                 400::ms => now;
@@ -84,7 +131,7 @@ public class LooperManager : MonoBehaviour
                 //start recording input
                 loopme2.record(1);
                 //begin ramping down
-                1600::ms => now;
+                3600::ms => now;
                 400::ms => loopme2.recRamp;
                 //wait for ramp to finish, then stop recording
                 400::ms => now;
@@ -111,7 +158,7 @@ public class LooperManager : MonoBehaviour
                 //start recording input
                 loopme3.record(1);
                 //begin ramping down
-                1600::ms => now;
+                3600::ms => now;
                 400::ms => loopme3.recRamp;
                 //wait for ramp to finish, then stop recording
                 400::ms => now;
@@ -138,7 +185,7 @@ public class LooperManager : MonoBehaviour
                 //start recording input
                 loopme4.record(1);
                 //begin ramping down
-                1600::ms => now;
+                3600::ms => now;
                 400::ms => loopme4.recRamp;
                 //wait for ramp to finish, then stop recording
                 400::ms => now;
@@ -229,7 +276,7 @@ public class LooperManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //AccelerometerDataHandler();
     }
 
     public void recordAudio(string button) {
@@ -335,6 +382,35 @@ public class LooperManager : MonoBehaviour
             }
         }
     }
+
+    /* public void AccelerometerDataHandler() {
+        // Get accelerometer data
+        Vector3 accelerometerData = Input.acceleration;
+
+        // low-pass filter of accelerometer data
+        smoothedAccelerometerData = Vector3.Lerp(smoothedAccelerometerData, accelerometerData, smoothingValue);
+
+        // Map accelerometer data netween 0 and 1 and to RGB color
+        float x_axis = Mathf.Clamp01(smoothedAccelerometerData.x + 0.5f);
+        float y_axis = Mathf.Clamp01(smoothedAccelerometerData.y + 0.5f);
+        float z_axis = Mathf.Clamp01(smoothedAccelerometerData.z + 0.5f);
+        //Debug.Log("x-value: " + x_axis + "y-value: "+ y_axis + "z-value: " + z_axis);
+
+        //remap values to handpicked effect parameters
+        float delayData = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.7f);
+        float reverbData1 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.2f);
+        float reverbData2 = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.4f);
+        float filterData1 = Remap(z_axis, 0.0f, 1.0f, 10.0f, 10000.0f);
+        float filterData2 = Remap(z_axis, 0.0f, 1.0f, 0.0f, 30.0f);
+        //Debug.Log("delay =" + delayData + "reverb1 =" + reverbData1 + "reverb2 =" + reverbData2 + "filter1 =" + filterData1 + "filter2 =" + filterData2);
+
+        //send values to chuck
+        myChuck.SetFloat("myDelayGain", delayData);
+        myChuck.SetFloat("myReverbGain1", reverbData1);
+        myChuck.SetFloat("myReverbGain2", reverbData2);
+        myChuck.SetFloat("myFilterFreq", filterData1);
+        myChuck.SetFloat("myFilterRes", filterData2);
+    } */
     
     private float Remap(float aValue, float aIn1, float aIn2, float aOut1, float aOut2)
     {
