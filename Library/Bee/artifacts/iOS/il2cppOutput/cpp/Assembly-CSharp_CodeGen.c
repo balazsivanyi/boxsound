@@ -665,6 +665,7 @@ extern void LooperManager_Update_m78307B0C0B6B63F5C588FF9C5A1385E2785C78A8 (void
 extern void LooperManager_recordAudio_m197F813BA034A2520831618C6E43D1B958B03AF9 (void);
 extern void LooperManager_playAudio_m06D6F25732F6E70BD7F60EC9C302335B9289F9EB (void);
 extern void LooperManager_setEffect_m1F95ECC8554EC9131CC2C32BA659BD9B65CB1371 (void);
+extern void LooperManager_AccelerometerDataHandler_m79CD4FF90763B555C3026C8D5403F042379D5290 (void);
 extern void LooperManager_Remap_m2F8537F2DEE44CCB408557B90BE383A141C82100 (void);
 extern void LooperManager__ctor_m439F188AA83CA43AB0CFB5BC383BCF643CEEC5F5 (void);
 extern void MakeSound_Start_mA94C4B1892F1470285404217D92D84328C676414 (void);
@@ -948,7 +949,7 @@ extern void U3CWarpTextU3Ed__8_MoveNext_mCE7A826C5E4854C2C509C77BD18F5A9B6D691B0
 extern void U3CWarpTextU3Ed__8_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mD80368E9B7E259311C03E406B75161ED6F7618E3 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42 (void);
 extern void U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19 (void);
-static Il2CppMethodPointer s_methodPointers[901] = 
+static Il2CppMethodPointer s_methodPointers[902] = 
 {
 	Chuck_get_Manager_m7AF8DEFF5941202FD9C36170092534ED89E2E4CB,
 	Chuck_Initialize_mA45C6FEEFE0DB85E7902F457A90027B1AB433B0B,
@@ -1568,6 +1569,7 @@ static Il2CppMethodPointer s_methodPointers[901] =
 	LooperManager_recordAudio_m197F813BA034A2520831618C6E43D1B958B03AF9,
 	LooperManager_playAudio_m06D6F25732F6E70BD7F60EC9C302335B9289F9EB,
 	LooperManager_setEffect_m1F95ECC8554EC9131CC2C32BA659BD9B65CB1371,
+	LooperManager_AccelerometerDataHandler_m79CD4FF90763B555C3026C8D5403F042379D5290,
 	LooperManager_Remap_m2F8537F2DEE44CCB408557B90BE383A141C82100,
 	LooperManager__ctor_m439F188AA83CA43AB0CFB5BC383BCF643CEEC5F5,
 	MakeSound_Start_mA94C4B1892F1470285404217D92D84328C676414,
@@ -1852,7 +1854,7 @@ static Il2CppMethodPointer s_methodPointers[901] =
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_Reset_m07746C332D2D8CE5DEA59873C26F2FAD4B369B42,
 	U3CWarpTextU3Ed__8_System_Collections_IEnumerator_get_Current_m71D7F84D9DEF63BEC6B44866515DDCF35B142A19,
 };
-static const int32_t s_InvokerIndices[901] = 
+static const int32_t s_InvokerIndices[902] = 
 {
 	6486,
 	1942,
@@ -2472,6 +2474,7 @@ static const int32_t s_InvokerIndices[901] =
 	3599,
 	3599,
 	1050,
+	4474,
 	315,
 	4474,
 	4474,
@@ -2798,7 +2801,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	901,
+	902,
 	s_methodPointers,
 	0,
 	NULL,

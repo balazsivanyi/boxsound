@@ -12,7 +12,7 @@ public class LooperManager : MonoBehaviour
 
     //accelerometer variables
     private Vector3 smoothedAccelerometerData;
-    public float smoothingValue = 0.1f;
+    public float smoothingValue = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -80,17 +80,17 @@ public class LooperManager : MonoBehaviour
             //delay
             global float myDelay1;
             global float myDelay2;
-            0.1::second => delay1.max => delay1.delay;
-            0.1::second => delay2.max => delay2.delay;
-            0.1::second => delay3.max => delay3.delay;
-            0.1::second => delay4.max => delay4.delay;
+            0.6::second => delay1.max => delay1.delay;
+            0.6::second => delay2.max => delay2.delay;
+            0.6::second => delay3.max => delay3.delay;
+            0.6::second => delay4.max => delay4.delay;
             // set feedback
             myDelay2 => feedback.gain;
             // set effects mix
-            0.75 => delay1.gain;
-            0.75 => delay2.gain;
-            0.75 => delay3.gain;
-            0.75 => delay4.gain;
+            myDelay1 => delay1.gain;
+            myDelay1 => delay2.gain;
+            myDelay1 => delay3.gain;
+            myDelay1 => delay4.gain;
 
             //distortion
             global float myDistortion;
@@ -249,6 +249,40 @@ public class LooperManager : MonoBehaviour
                 myVolume4 => loopme4.gain;
                 myFilter4 => filter4.freq;
 
+                 //global effect parameters
+                //reverb
+                global float myReverb;
+                myReverb => reverb1.mix;
+                myReverb => reverb2.mix;
+                myReverb => reverb3.mix;
+                myReverb => reverb4.mix;
+                
+                //delay
+                global float myDelay1;
+                global float myDelay2;
+                0.8::second => delay1.max => delay1.delay;
+                0.4::second => delay2.max => delay2.delay;
+                0.6::second => delay3.max => delay3.delay;
+                0.2::second => delay4.max => delay4.delay;
+                // set feedback
+                myDelay2 => feedback.gain;
+                // set effects mix
+                myDelay1 => delay1.gain;
+                myDelay1 => delay2.gain;
+                myDelay1 => delay3.gain;
+                myDelay1 => delay4.gain;
+
+                //distortion
+                global float myDistortion;
+                myDistortion => osc1.gain;
+                myDistortion => osc2.gain;
+                myDistortion => osc3.gain;
+                myDistortion => osc4.gain;
+                3 => metalGain1.op;
+                3 => metalGain2.op;
+                3 => metalGain3.op;
+                3 => metalGain4.op;
+
                 2::second => now;
 
             }
@@ -400,18 +434,18 @@ public class LooperManager : MonoBehaviour
         smoothedAccelerometerData = Vector3.Lerp(smoothedAccelerometerData, accelerometerData, smoothingValue);
 
         // Map accelerometer data netween 0 and 1 and to RGB color
-        float x_axis = Mathf.Clamp01(smoothedAccelerometerData.x + 0.5f);
-        float y_axis = Mathf.Clamp01(smoothedAccelerometerData.y + 0.5f);
-        float z_axis = Mathf.Clamp01(smoothedAccelerometerData.z + 0.5f);
+        /* float x_axis = Mathf.Clamp01(smoothedAccelerometerData.x);
+        float y_axis = Mathf.Clamp01(smoothedAccelerometerData.y);  
+        float z_axis = Mathf.Clamp01(smoothedAccelerometerData.z); */
         //Debug.Log("x-value: " + x_axis + "y-value: "+ y_axis + "z-value: " + z_axis);
 
         //remap values to handpicked effect parameters
-        float delayData1 = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.8f);
-        float delayData2 = Remap(x_axis, 0.0f, 1.0f, 0.0f, 0.7f);
-        float reverbData = Remap(y_axis, 0.0f, 1.0f, 0.0f, 0.5f);
-        float distortionData = Remap(z_axis, 0.0f, 1.0f, 0.0f, 0.9f);
-        //Debug.Log("delay =" + delayData + "reverb1 =" + reverbData1 + "reverb2 =" + reverbData2 + "filter1 =" + filterData1 + "filter2 =" + filterData2);
-
+        float delayData1 = Remap(smoothedAccelerometerData.x, -1.0f, 1.0f, -0.75f, 0.75f);
+        float delayData2 = Remap(smoothedAccelerometerData.x, -1.0f, 1.0f, -0.5f, 0.5f);
+        float reverbData = Remap(smoothedAccelerometerData.y, -1.0f, 1.0f, -0.3f, 0.3f);
+        float distortionData = Remap(smoothedAccelerometerData.z, -1.0f, 1.0f, -0.7f, 0.7f);
+        Debug.Log("delay1 =" + delayData1 + "delay1 =" + delayData2 + "reverb =" + reverbData + "distortion =" + distortionData);
+ 
         //send values to chuck
         myChuck.SetFloat("myDelay1", delayData1);
         myChuck.SetFloat("myDelay2", delayData2);
