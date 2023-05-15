@@ -7,7 +7,6 @@ using UnityEngine;
 // name: Waveform.cs
 // desc: set up and draw the audio waveform
 //-----------------------------------------------------------------------------
-[ExecuteInEditMode]
 public class Waveform : MonoBehaviour
 {
     // prefab reference
@@ -15,7 +14,10 @@ public class Waveform : MonoBehaviour
     // array of game objects
     public GameObject[] the_cubes = new GameObject[1024];
     // controllable scale
-    public float MY_SCALE = 200;
+    public float MY_SCALE = 1200;
+
+    public float rotationSpeed = 0.5f;
+    public float rotationRange = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,17 +31,17 @@ public class Waveform : MonoBehaviour
             // instantiate a prefab game object
             GameObject go = Instantiate(the_pfCube);
             // color material
-            go.GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(.5f, 1, .5f));
+            go.GetComponent<Renderer>().sharedMaterial.SetColor("_BaseColor", new Color(.5f, 1, .5f));
             // default position
             go.transform.position = this.transform.position;
             // increment the x position
-            //x += xIncrement;
+            x += xIncrement;
             // give a name!
             go.name = "cube" + i;
             // set a child of this waveform
             go.transform.parent = this.transform;
             this.transform.eulerAngles = new Vector3(0, -0.703125f * i, 0);
-            go.transform.position = Vector3.forward * 100;
+            go.transform.position = Vector3.forward * 10;
             // put into array
             the_cubes[i] = go;
         }
@@ -62,5 +64,12 @@ public class Waveform : MonoBehaviour
                             MY_SCALE * wf[i],
                             the_cubes[i].transform.localPosition.z);
         }
+
+        // Apply rotation to the parent object
+        float rotationX = Mathf.PerlinNoise(Time.time * rotationSpeed, 0) * rotationRange;
+        float rotationY = Mathf.PerlinNoise(Time.time * rotationSpeed, 1) * rotationRange;
+        float rotationZ = Mathf.PerlinNoise(Time.time * rotationSpeed, 2) * rotationRange;
+
+        transform.rotation = Quaternion.Euler(rotationX, rotationY, rotationZ);
     }
 }
